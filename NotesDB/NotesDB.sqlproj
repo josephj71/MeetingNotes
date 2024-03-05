@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{f3d32a31-17b9-453e-89f4-fd04bd9bb469}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -59,6 +59,8 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\sp" />
+    <Folder Include="dbo\sp\Users" />
+    <Folder Include="dbo\sp\Meetings" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\MeetingNotes.sql" />
@@ -66,13 +68,24 @@
     <Build Include="dbo\Tables\MeetingUsers.sql" />
     <Build Include="dbo\Tables\NoteActions.sql" />
     <Build Include="dbo\Tables\Users.sql" />
-    <Build Include="dbo\sp\sp_DeleteUser.sql" />
-    <Build Include="dbo\sp\sp_GetAllUsers.sql" />
-    <Build Include="dbo\sp\sp_GetUserById.sql" />
-    <Build Include="dbo\sp\sp_InsertUser.sql" />
-    <Build Include="dbo\sp\sp_UpdateUser.sql" />
+    <Build Include="dbo\sp\Users\sp_UpdateUser.sql" />
+    <Build Include="dbo\sp\Users\sp_DeleteUser.sql" />
+    <Build Include="dbo\sp\Users\sp_GetAllUsers.sql" />
+    <Build Include="dbo\sp\Users\sp_GetUserById.sql" />
+    <Build Include="dbo\sp\Users\sp_InsertUser.sql" />
+    <Build Include="dbo\sp\Meetings\sp_InsertMeeting.sql" />
+    <Build Include="dbo\sp\Meetings\sp_GetAllMeetings.sql" />
+    <Build Include="dbo\sp\Meetings\sp_GetMeetingById.sql" />
+    <Build Include="dbo\sp\Meetings\sp_UpdateMeeting.sql" />
+    <Build Include="dbo\sp\Meetings\sp_DeleteMeeting.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="NotesDB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\Script.PostDeploy.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NotesDB.publish.xml" />
   </ItemGroup>
 </Project>
