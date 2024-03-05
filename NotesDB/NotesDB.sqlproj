@@ -57,13 +57,20 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\sp" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Users.sql" />
-    <Build Include="dbo\Meetings.sql" />
-    <Build Include="dbo\MeetingNotes.sql" />
-    <Build Include="dbo\NoteActions.sql" />
-    <Build Include="dbo\MeetingUsers.sql" />
+    <Build Include="dbo\Tables\MeetingNotes.sql" />
+    <Build Include="dbo\Tables\Meetings.sql" />
+    <Build Include="dbo\Tables\MeetingUsers.sql" />
+    <Build Include="dbo\Tables\NoteActions.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\sp\sp_DeleteUser.sql" />
+    <Build Include="dbo\sp\sp_GetAllUsers.sql" />
+    <Build Include="dbo\sp\sp_GetUserById.sql" />
+    <Build Include="dbo\sp\sp_InsertUser.sql" />
+    <Build Include="dbo\sp\sp_UpdateUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="NotesDB.refactorlog" />
