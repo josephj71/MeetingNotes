@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="73a0e044-a514-41c3-b7d6-85da5cac6492" ChangeDateTime="03/05/2024 19:33:07">
+    <Property Name="ElementName" Value="[dbo].[NoteActions].[StatusId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NoteActions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Status" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6d07a43f-aab6-492c-babb-9aaf6cbe2095" ChangeDateTime="03/05/2024 19:35:15">
+    <Property Name="ElementName" Value="[dbo].[NoteActions].[CreatedDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NoteActions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreateDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="101c4137-3fd7-4a38-a5fa-4f68e918df3d" ChangeDateTime="03/05/2024 19:36:20">
+    <Property Name="ElementName" Value="[dbo].[MeetingUsers].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MeetingUsers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingIf" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8def6f3d-82c2-485c-a402-1bbfdcd7bf14" ChangeDateTime="03/05/2024 19:36:24">
+    <Property Name="ElementName" Value="[dbo].[MeetingUsers].[MeetingIf]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MeetingUsers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingId" />
+  </Operation>
+</Operations>
