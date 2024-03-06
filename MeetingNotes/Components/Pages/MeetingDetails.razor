@@ -1,0 +1,52 @@
+﻿@page "/meetingdetails/{meetingid}"
+@using NotesDataAccess.Models
+@inject HttpClient client
+
+@if (meeting != null)
+{
+    <h3>@meeting.MeetingName</h3>
+    <h4>@meeting.Description</h4>
+    <div>
+        <h5>Notes:</h5>
+        @for(var x=0; x < 5; x++){
+        <div>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+            <div style ="margin-left: 20px;">Action Items
+                @for(var i = 1; i < 4; i++)
+                {
+                    <div style="margin-left: 20px; padding-bottom: 10px;">
+                    <ul>
+                        <li>
+                            <div>
+                                <div>Action @i: Do this Task</div>
+                                <div>Assigned To: Joe Johnosn</div>
+                                <div>Assigner: John Doe</div>
+                                <div>Creasted: 3/4/2024</div>
+                                <div>Status: Pending</div>
+                                <div>Start Date: 3/5/2024</div>
+                                <div>Due Date: 3/15/2024</div>
+                                <div>Completed Date: </div>
+                            </div>
+                        </li>
+                    </ul>
+                    </div>
+                }
+             </div>
+             
+        </div>
+        }
+    </div>
+
+}
+@code {
+    [Parameter]
+    public string MeetingId { get; set; }
+
+    private MeetingModel meeting;
+
+    protected override async Task OnInitializedAsync()
+    {
+        meeting = await client.GetFromJsonAsync<MeetingModel>($"https://localhost:7065/api/meeting/{MeetingId}");
+
+    }
+}

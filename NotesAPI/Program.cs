@@ -18,7 +18,9 @@ namespace NotesAPI
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<ISqlDataProvider, SqlDataProvider>();
+            
             builder.Services.AddSingleton<IUserDataService, UserDataService>();
+            builder.Services.AddSingleton<IMeetingDataService , MeetingDataService>();
 
             var app = builder.Build();
 

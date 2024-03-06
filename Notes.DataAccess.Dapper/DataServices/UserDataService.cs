@@ -24,7 +24,7 @@ namespace NotesDataAccess.DataServices
 
         public async Task<UserModel?> GetUser(int id)
         {
-            var result = await sqlDataProvider.LoadData<UserModel, dynamic>("dbo.sp_GetUserById", new { Id = id });
+            var result = await sqlDataProvider.LoadData<UserModel, dynamic>("dbo.sp_GetUserById", new { UID = id });
 
             return result.FirstOrDefault();
         }
@@ -41,7 +41,7 @@ namespace NotesDataAccess.DataServices
 
         public async Task DeleteUser(int id)
         {
-            await sqlDataProvider.SaveData("dbo.sp_DeleteUser", new { id });
+            await sqlDataProvider.SaveData("dbo.sp_DeleteUser", new { UId = id });
         }
 
     }

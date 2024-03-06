@@ -7,21 +7,21 @@ namespace NotesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class MeetingController : ControllerBase
     {
-        private readonly IUserDataService dataService;
+        private readonly IMeetingDataService dataService;
 
-        public UsersController(IUserDataService data)
+        public MeetingController(IMeetingDataService data)
         {
             this.dataService = data;
         }
 
         [HttpGet]
-        public async Task<IResult> GetUsers()
+        public async Task<IResult> GetMeetings()
         {
             try
             {
-                return Results.Ok(await dataService.GetUsers());
+                return Results.Ok(await dataService.GetMeetings());
             }
             catch (Exception ex)
             {
@@ -30,11 +30,11 @@ namespace NotesAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IResult> GetUser(int id)
+        public async Task<IResult> GetMeeting(int id)
         {
             try
             {
-                var results =  await dataService.GetUser(id);
+                var results = await dataService.GetMeeting(id);
                 return results == null ? Results.NotFound() : Results.Ok(results);
             }
             catch (Exception ex)
@@ -44,25 +44,25 @@ namespace NotesAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> AddUser(UserModel user)
+        public async Task<IResult> AddMeeting(MeetingModel meeting)
         {
             try
             {
-                await dataService.InsertUser(user);
+                await dataService.InsertMeeting(meeting);
                 return Results.Ok();
             }
             catch (Exception ex)
             {
-               return Results.Problem(ex.Message);
+                return Results.Problem(ex.Message);
             }
         }
 
         [HttpPut]
-        public async Task<IResult> UpdateUser(UserModel user)
+        public async Task<IResult> UpdateMeeting(MeetingModel meeting)
         {
             try
             {
-                await dataService.UpdateUser(user);
+                await dataService.UpdateMeeting(meeting);
                 return Results.Ok();
             }
             catch (Exception ex)
@@ -73,11 +73,11 @@ namespace NotesAPI.Controllers
 
 
         [HttpDelete]
-        public async Task<IResult> DeleteUser(int id)
+        public async Task<IResult> DeleteMeeting(int id)
         {
             try
             {
-                await dataService.DeleteUser(id);
+                await dataService.DeleteMeeting(id);
                 return Results.Ok();
             }
             catch (Exception ex)
@@ -85,6 +85,5 @@ namespace NotesAPI.Controllers
                 return Results.Problem(ex.Message);
             }
         }
-
     }
 }
