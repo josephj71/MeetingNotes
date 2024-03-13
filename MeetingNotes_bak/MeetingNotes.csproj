@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>MeetingNotes-70256EF2-B2AF-4418-AF18-545BF4E55FFD</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.17.1" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.13.4" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.17.1" />
+    <PackageReference Include="MudBlazor" Version="6.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NotesModels\NotesModels.csproj" />
+  </ItemGroup>
+
+</Project>

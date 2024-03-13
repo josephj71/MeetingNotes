@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesDataAccess", "Notes.Da
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NotesDB", "NotesDB\NotesDB.sqlproj", "{F3D32A31-17B9-453E-89F4-FD04BD9BB469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingNotes", "MeetingNotes\MeetingNotes.csproj", "{16765BDA-589E-4E35-9B59-DF69D98105B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesModels", "NotesModels\NotesModels.csproj", "{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesModels", "NotesModels\NotesModels.csproj", "{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingNotes", "MeetingNotes\MeetingNotes\MeetingNotes.csproj", "{21969AAF-D144-4B52-8033-91D5C4823CFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingNotes.Client", "MeetingNotes\MeetingNotes.Client\MeetingNotes.Client.csproj", "{4D2521AE-4D1B-4C8B-9253-8FAF301A8D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +35,18 @@ Global
 		{F3D32A31-17B9-453E-89F4-FD04BD9BB469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3D32A31-17B9-453E-89F4-FD04BD9BB469}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3D32A31-17B9-453E-89F4-FD04BD9BB469}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{16765BDA-589E-4E35-9B59-DF69D98105B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16765BDA-589E-4E35-9B59-DF69D98105B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16765BDA-589E-4E35-9B59-DF69D98105B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16765BDA-589E-4E35-9B59-DF69D98105B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B57C256C-314B-4F87-9F6A-6BB28DEC7EFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21969AAF-D144-4B52-8033-91D5C4823CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21969AAF-D144-4B52-8033-91D5C4823CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21969AAF-D144-4B52-8033-91D5C4823CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21969AAF-D144-4B52-8033-91D5C4823CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D2521AE-4D1B-4C8B-9253-8FAF301A8D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D2521AE-4D1B-4C8B-9253-8FAF301A8D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D2521AE-4D1B-4C8B-9253-8FAF301A8D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D2521AE-4D1B-4C8B-9253-8FAF301A8D8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

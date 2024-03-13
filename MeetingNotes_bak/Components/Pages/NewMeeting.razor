@@ -1,0 +1,85 @@
+﻿@page "/newmeeting"
+
+@using System.ComponentModel.DataAnnotations
+@using NotesDataAccess.Models
+
+<h3>New Meeting</h3>
+    
+        <EditForm FormName="NewMeeting" method="post" Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12" sm="7">
+                    <MudCard>
+                        <MudCardContent>
+                            <MudTextField Label="Meeting Name" HelperText="Max. 50 characters"
+                                          @bind-Value="model.MeetingName" For="@(() => model.MeetingName)" />
+                            <MudTextField Label="Meeting Description" Class="mt-3"
+                                          @bind-Value="model.Description" For="@(() => model.Description)" />
+                            <MudTextField InputType="InputType.DateTimeLocal" Label="Meeting Date" HelperText="Meeting date is required" Class="mt-3"
+                                          @bind-Value="model.MeetingDate" For="@(() => model.MeetingDate)" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="5">
+                    <MudPaper Class="pa-4 mud-height-full">
+                        <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                        @if (success)
+                        {
+                            <MudText Color="Color.Success">Success</MudText>
+                        }
+                        else
+                        {
+                            <MudText Color="@Color.Error">
+                                <ValidationSummary />
+                            </MudText>
+                        }
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudText Typo="Typo.body2" Align="Align.Center">
+                        Fill out the form correctly to see the success message.
+                    </MudText>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+
+@code {
+
+    public class MeetingModelForm
+    {
+        [Required]
+        public string MeetingName { get; set; }
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public DateTime MeetingDate { get; set; }
+    }
+
+    [SupplyParameterFromForm]
+    MeetingModelForm model { get; set; }
+
+    bool success;
+
+    protected override void OnInitialized()
+    {
+        model = new MeetingModelForm { MeetingDate = DateTime.Today };
+
+        base.OnInitialized();
+    }
+
+    private void OnMeetingNameChanged()
+    {
+        
+    }
+
+
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+
+}
