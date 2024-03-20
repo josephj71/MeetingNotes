@@ -1,0 +1,88 @@
+﻿@page "/yarp"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Identity.Web
+@using System.Net.Http.Headers
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+@attribute [Authorize]
+@inject HttpClient client
+@inject ITokenAcquisition tokenAcquistion
+@inject IApiScopes apiScopes
+
+
+<h1>YarpTest</h1>
+
+<p>Welcome to YARP testing</p>
+<p class="alert-warning">@errorMsg</p>
+
+
+<button class="btn btn-primary" @onclick="ButtonClickedWoToken">Test without Token</button>
+<button class="btn btn-primary" @onclick="ButtonClickedWToken">Test with Token</button>
+
+<p>Records returned: @RecordCount</p>
+
+<p>
+    @if (RecordCount > 0)
+    {
+        @for (var x = 0; x < RecordCount; x++)
+        {
+            int n = x;
+            <div>@empRecords[n]</div>
+        }
+    }
+</p>
+
+@code {
+    private int RecordCount = 0;
+    private string errorMsg = "";
+    private List<EmployeeRecord> empRecords = new List<EmployeeRecord>();
+
+    private async void ButtonClickedWoToken()
+    {
+        try
+        {          
+            errorMsg = "";
+            var accessToken = await tokenAcquistion.GetAccessTokenForUserAsync(new[] { apiScopes.DemoEmployeeApiScope! });
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //empRecords = await client.GetFromJsonAsync<List<EmployeeRecord>>("https://localhost:7147/api/Employees");
+            empRecords = await client.GetFromJsonAsync<List<EmployeeRecord>>("https://localhost:7182/employees/getall");
+
+
+            RecordCount = empRecords.Count;            
+        }
+        catch(Exception ex)
+        {
+            errorMsg = ex.Message;
+        }
+
+        StateHasChanged();
+    }
+
+    private async void ButtonClickedWToken()
+    {
+        try
+        {
+            errorMsg = "";
+            var accessToken = await tokenAcquistion.GetAccessTokenForUserAsync(new[] { apiScopes.DemoEmployeeApiScope! });
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //empRecords = await client.GetFromJsonAsync<List<EmployeeRecord>>("https://localhost:7147/api/Employees");
+            empRecords = await client.GetFromJsonAsync<List<EmployeeRecord>>("https://localhost:7182/employees/getall");
+
+
+            RecordCount = empRecords.Count;
+        }
+        catch (Exception ex)
+        {
+            errorMsg = ex.Message;
+        }
+
+        StateHasChanged();
+    }
+
+    record EmployeeRecord(string EmployeeId, string FirstName, string LastName);
+}

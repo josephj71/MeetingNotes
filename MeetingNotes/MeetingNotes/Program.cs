@@ -1,13 +1,12 @@
-using MeetingNotes.Client.Pages;
 using MeetingNotes.Components;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
-using Microsoft.AspNetCore.Rewrite;
+using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using MeetingNotes;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,18 +15,34 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddHttpClient("NotesAPI", ops => new HttpClient {  BaseAddress = new Uri(builder.Configuration["BaseApi"] ?? "")});
+string demoEmpScope = builder.Configuration["ApiScopes:DemoEmployeeApiScope"];
 
-builder.Services.AddControllersWithViews().AddMicrosoftIdentityUI();
+builder.Services.AddScoped(client => new HttpClient());
+builder.Services.AddSingleton<IApiScopes>(new ApiScopes { DemoEmployeeApiScope = demoEmpScope });
+
+
+builder.Services.AddServerSideBlazor().AddMicrosoftIdentityConsentHandler();
+
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi(new string[] { demoEmpScope })
+    .AddInMemoryTokenCaches();
 
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = options.DefaultPolicy;
 });
-builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                                .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
-builder.Services.AddServerSideBlazor().AddMicrosoftIdentityConsentHandler();
+
+builder.Services.AddControllersWithViews().AddMicrosoftIdentityUI();
+
+builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, ops =>
+{
+    ops.Events.OnRemoteFailure = async context =>
+    {
+
+    };
+});
 
 
 var app = builder.Build();
@@ -44,15 +59,15 @@ else
     app.UseHsts();
 }
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
