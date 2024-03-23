@@ -15,9 +15,14 @@
 <p>Welcome to YARP testing</p>
 <p class="alert-warning">@errorMsg</p>
 
+<div>
+    <button class="btn btn-primary" @onclick="ButtonClickedWoToken">Test without Token</button>
+    <button class="btn btn-primary" @onclick="ButtonClickedWToken">Test with Token</button>
+</div>
+<div>
+    <button class="btn btn-primary" @onclick="ButtonAddEmployee">Add Test Employee</button>
+</div>
 
-<button class="btn btn-primary" @onclick="ButtonClickedWoToken">Test without Token</button>
-<button class="btn btn-primary" @onclick="ButtonClickedWToken">Test with Token</button>
 
 <p>Records returned: @RecordCount</p>
 
@@ -84,5 +89,49 @@
         StateHasChanged();
     }
 
-    record EmployeeRecord(string EmployeeId, string FirstName, string LastName);
+    private async void ButtonAddEmployee()
+    {
+        try
+        {
+            errorMsg = "";
+            var accessToken = await tokenAcquistion.GetAccessTokenForUserAsync(new[] { apiScopes.DemoEmployeeApiScope! });
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string[] firstName = { "Tim", "Sue", "Bob", "Rick", "Sam" };
+            string[] lastName = { "Corey", "Storm", "Smith", "Johnson", "Murphy" };
+
+            EmployeeRecord newEmp = new EmployeeRecord
+            {
+                FirstName = firstName[Random.Shared.Next(0, 4)],
+                LastName = lastName[Random.Shared.Next(0, 4)]
+            };
+
+
+            await client.PostAsJsonAsync<EmployeeRecord>("https://localhost:7147/api/Employee", newEmp);
+            empRecords = await client.GetFromJsonAsync<List<EmployeeRecord>>("https://localhost:7182/employees/getall");
+
+
+            RecordCount = empRecords.Count;
+        }
+        catch (Exception ex)
+        {
+            errorMsg = ex.Message;
+        }
+
+        StateHasChanged();
+    }
+
+    public class EmployeeRecord
+    {
+        public string? EmployeeId { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return $"Employee Id:{EmployeeId} FirstName:{FirstName} LastName:{LastName}";
+        }
+    }
 }
